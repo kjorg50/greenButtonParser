@@ -39,6 +39,10 @@ def appendToFile(filename, data):
     for i in range(len(times)):
         times[i] = times[i].strip()
 
+        # check for weird unicode character that sometimes is included
+        if times[i][-1] == "†":
+            times[i] = times[i][:-1]
+
     writer.writerow([times[0], times[1], data[1], data[2]])
     f_out.close()
 
