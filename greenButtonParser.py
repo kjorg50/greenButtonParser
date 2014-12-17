@@ -12,7 +12,7 @@ NUMBERS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 def printHeader(outfile):
     f_out = open(outfile, 'w', newline='')
     writer = csv.writer(f_out)
-    writer.writerow(["Energy Consumption Time Period", "Usage (Real energy in kilowatt-hours)", "Reading Quality"])
+    writer.writerow(["Time Period Start", "Time Period End", "Usage (Real energy in kilowatt-hours)", "Reading Quality"])
 
 
 def parseData(infile, outfile):
@@ -34,7 +34,12 @@ def parseData(infile, outfile):
 def appendToFile(filename, data):
     f_out = open(filename, 'a', newline='')
     writer = csv.writer(f_out)
-    writer.writerow(data)
+    times = data[0].split("to")
+
+    for i in range(len(times)):
+        times[i] = times[i].strip()
+
+    writer.writerow([times[0], times[1], data[1], data[2]])
     f_out.close()
 
 
